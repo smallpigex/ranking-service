@@ -1,6 +1,7 @@
 package net.smallpigex.ranking.domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,5 +32,27 @@ public class Bet extends EntityBase<Bet> {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
+    Bet bet = (Bet) o;
+    return Objects.equals(amount, bet.amount) &&
+        Objects.equals(user, bet.user);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(super.hashCode(), amount, user);
   }
 }

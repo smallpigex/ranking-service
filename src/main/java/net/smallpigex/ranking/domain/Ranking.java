@@ -2,14 +2,21 @@ package net.smallpigex.ranking.domain;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import net.smallpigex.ranking.summary.UserSummary;
 
 @Entity
 public class Ranking extends EntityBase<Ranking> {
 
-  @Embedded
+  @ElementCollection
+  @CollectionTable(
+      name="user_summary",
+      joinColumns=@JoinColumn(name="owner_id")
+  )
   private List<UserSummary> userSummaries;
   private Date startDate;
   private Date endDate;

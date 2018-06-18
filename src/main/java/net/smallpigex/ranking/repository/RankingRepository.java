@@ -10,6 +10,6 @@ public interface RankingRepository extends JpaRepository<Ranking, Long> {
   @Query("select  new net.smallpigex.ranking.summary.UserSummary( "
       + "u.id, sum(Bet.amount) as totalAmount) "
       + "from User as u "
-      + "join u.bet Bet group by u")
+      + "join u.bets Bet group by u")
   Optional<Ranking> findRanking();
 }

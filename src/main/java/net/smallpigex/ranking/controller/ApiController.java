@@ -47,7 +47,7 @@ public class ApiController {
     betRepository.save(bet2);
 
     User bob = new User();
-    bob.setBrandAccountId(1);
+    bob.setBrandAccountId(2);
     bob.setBrandId(1);
 
     Bet bobBet1 = new Bet();
@@ -73,6 +73,9 @@ public class ApiController {
     if("month".equalsIgnoreCase(timeInterval)) {
     } else {
     }
+
+    User user = userRepository.findById(1L);
+    System.out.println(user.getTotalAmount().toString());
     Ranking ranking = rankingService.getRanking(timeInterval);
     RankingResource rankingResource = new RankingResource(ranking);
     return new ResponseEntity<>(rankingResource, HttpStatus.OK);
