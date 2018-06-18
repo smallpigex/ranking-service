@@ -10,13 +10,12 @@ import net.smallpigex.ranking.summary.UserSummary;
 public class RankingResource {
 
   @JsonProperty(value = "data")
-  private List<UserResource> userResources;
+  private List<UserResource> userResources = new ArrayList<>();
   private Date startDate;
   private Date endDate;
 
 
   public RankingResource(Ranking ranking) {
-    userResources = new ArrayList<>();
     List<UserSummary> users = ranking.getUserSummaries();
     for (UserSummary summary : users) {
       UserResource userResource = new UserResource();
@@ -26,6 +25,24 @@ public class RankingResource {
     }
     startDate = ranking.getStartDate();
     endDate = ranking.getEndDate();
+  }
+
+  public RankingResource() {}
+
+
+  public static RankingResource manageRankingBuilder(Ranking ranking) {
+    RankingResource rankingResource = new RankingResource();
+    List<UserSummary> users = ranking.getUserSummaries();
+    for (UserSummary summary : users) {
+      UserResource userResource = new UserResource();
+      userResource.setId(summary.getId());
+      userResource.setTotalAmount(summary.getTotalAmount().toString());
+      userResource.setAccount(summary.getBrandAccount());
+      rankingResource.userResources.add(userResource);
+    }
+    rankingResource.setEndDate(ranking.getStartDate());
+    rankingResource.setEndDate(ranking.getEndDate());
+    return rankingResource;
   }
 
   public List<UserResource> getUserResources() {

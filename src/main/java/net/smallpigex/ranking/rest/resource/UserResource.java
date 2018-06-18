@@ -6,17 +6,17 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class UserResource {
 
   @JsonInclude(Include.NON_NULL)
-  private String id;
+  private Long id;
   private String account;
   private String totalAmount;
   private String currency;
   private String rank;
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

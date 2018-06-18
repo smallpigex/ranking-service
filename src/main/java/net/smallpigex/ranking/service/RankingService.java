@@ -36,7 +36,7 @@ public class RankingService {
     ZoneId zone = ZoneId.systemDefault();
     ranking.setStartDate(Date.from(monday.atStartOfDay(zone).toInstant()));
     ranking.setEndDate(Date.from(sunday.atStartOfDay(zone).toInstant()));
-    rankingRepository.findRanking();
+//    rankingRepository.findRanking();
     return ranking;
   }
 
